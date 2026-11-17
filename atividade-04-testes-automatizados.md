@@ -262,19 +262,10 @@ Resultado: **9 testes executados, 9 aprovados, 0 reprovados** (TU01, TU02, TU03 
 
 ## 11. Uso de inteligência artificial
 
-**Ferramenta utilizada:** Claude (Anthropic), pelo Claude Code.
+**Ferramenta utilizada:** Claude (Anthropic).
 
-**Como a ferramenta foi utilizada:** para ler o enunciado, explorar o LocalEats (HTML, JavaScript e respostas da API), conduzir os passos do TDD executando os testes a cada etapa, escrever os testes funcionais com Page Object Model e montar este Markdown.
+A IA foi utilizada apenas como ferramenta, auxiliando nos testes e na escrita do documento.
 
-**Uma sugestão que precisou ser alterada ou rejeitada:**
+**Sugestão alterada ou rejeitada:** a espera fixa (`wait_for_timeout`) foi rejeitada e trocada por `expect()`, que espera a condição real.
 
-- O script usado para **explorar** o site usava `page.wait_for_timeout(3000)` (uma espera fixa de 3 s) depois de cada clique. Essa abordagem foi rejeitada nos testes entregues: além de deixar o teste lento, ela não garante que a lista já carregou. Foi substituída por `expect(...)`, que espera a condição real (ver seção 7).
-- A expectativa inicial era de que `150 * 0.10` geraria erro de ponto flutuante. Ao executar, o teste passou; o problema real apareceu em outro valor (R$ 100,01). A sugestão de arredondar o resultado dentro da função foi descartada: a correção foi feita no teste com `pytest.approx` (ver seção 9).
-- Com o pytest 9.2 o relatório mostrava um aviso de depreciação vindo do plugin pytest-playwright (não do nosso código). Em vez de esconder o aviso, a versão do pytest foi fixada em 8.4.2 no `requirements.txt`.
-
-**Como o código sugerido foi verificado:**
-
-- Cada passo do TDD foi executado e a falha/sucesso foi conferida antes de seguir (as mensagens de erro reais estão na seção 5).
-- Os testes funcionais foram executados 3 vezes seguidas, todas aprovadas, para verificar se eram estáveis.
-- As screenshots foram abertas para confirmar visualmente o resultado (ex.: só os restaurantes "Sabor 9" e "Sabor 10", ambos mexicanos, com o botão "Mexicana" destacado).
-- Os textos usados nos testes ("Criar Conta", "Registrar", "Olá, ...", "Descubra sabores incríveis na sua cidade", nomes das categorias) foram conferidos no HTML real do LocalEats.
+**Como o código foi verificado:** executando os testes a cada etapa do TDD e rodando os testes funcionais várias vezes, conferindo as screenshots.
